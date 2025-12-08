@@ -2,7 +2,7 @@ import express from "express";
 import connectDB from "./config/db";
 import logger from "./config/logger";
 import morganMiddleware from "./middleware/morgan";
-import userRoutes from "./routes/user.route";
+import authRoutes from "./routes/auth.route";
 import driverRoutes from "./routes/driver.route";
 
 const app = express();
@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 app.use(morganMiddleware);
 
-app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/drivers", driverRoutes);
 try {
     connectDB();
