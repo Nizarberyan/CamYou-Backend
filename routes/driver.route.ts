@@ -1,11 +1,9 @@
 import { Router } from "express";
-import validate from "../middleware/validate";
-import { createDriverSchema } from "../validations/driver.validation";
+import DriverController from "../controllers/driver.controller";
 
 const router = Router();
 
-router.post("/", validate(createDriverSchema), (req, res) => {
-    
-});
+router.get("/", DriverController.getDrivers);
+router.post("/", DriverController.createDriver);
 
 export default router;
