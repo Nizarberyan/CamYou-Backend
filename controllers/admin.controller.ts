@@ -1,5 +1,3 @@
-const adminController = {
-
-};
+const adminController = {};
 
 export default adminController;
