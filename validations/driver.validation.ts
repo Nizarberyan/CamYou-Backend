@@ -1,4 +1,4 @@
-import { object, string, date, mixed } from "yup";
+import { object, string, date } from "yup";
 
 export const createDriverSchema = object({
   body: object({
@@ -11,6 +11,6 @@ export const createDriverSchema = object({
       .required("Password is required"),
     licenseNumber: string().required("License number is required"),
     licenseExpiry: date().required("License expiry date is required"),
-    status: mixed().oneOf(["active", "inactive", "on_trip"]).default("active"),
+    status: string().oneOf(["active", "inactive", "on_trip"]).default("active"),
   }),
 });
