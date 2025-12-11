@@ -9,6 +9,7 @@ export interface IUser extends Document {
   licenseNumber?: string;
   licenseExpiry?: Date;
   status?: "active" | "inactive" | "on_trip";
+  profileImage?: string; // URL to the profile image
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -42,6 +43,10 @@ const userSchema = new Schema<IUser>(
       type: String,
       enum: ["active", "inactive", "on_trip"],
       default: "active",
+    },
+    profileImage: {
+      type: String,
+      default: "", // Or provide a default placeholder URL if preferred
     },
   },
   { timestamps: true },

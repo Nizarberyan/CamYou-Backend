@@ -10,6 +10,7 @@ export const createUserSchema = object({
       .min(6, "Password must be at least 6 characters long")
       .required("Password is required"),
     role: mixed().oneOf(["user", "admin", "driver"]).default("user"),
+    profileImage: string(),
   }),
 });
 

@@ -4,8 +4,8 @@ import jwt from "jsonwebtoken";
 const AuthService = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: async (userData: any) => {
-    const { name, email, password } = userData;
-    const user = await User.create({ name, email, password });
+    const { name, email, password, profileImage } = userData;
+    const user = await User.create({ name, email, password, profileImage });
 
     const token = jwt.sign(
       { id: user._id, role: user.role },

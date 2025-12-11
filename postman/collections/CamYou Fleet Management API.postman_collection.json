@@ -20,8 +20,34 @@
               }
             ],
             "body": {
-              "mode": "raw",
-              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"password\": \"password123\",\n    \"role\": \"user\"\n}"
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "John Doe",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "john@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password123",
+                  "type": "text"
+                },
+                {
+                  "key": "role",
+                  "value": "user",
+                  "type": "text"
+                },
+                {
+                  "key": "profileImage",
+                  "type": "file",
+                  "src": []
+                }
+              ]
             },
             "url": {
               "raw": "{{baseUrl}}/api/auth/register",
@@ -734,6 +760,193 @@
         }
       ],
       "id": "b5e91199-5d99-432c-949c-42db3967bf06"
+    },
+    {
+      "name": "Trailers",
+      "item": [
+        {
+          "name": "Get All Trailers",
+          "id": "get-all-trailers-id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/trailers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers"
+              ]
+            },
+            "description": "Get a list of all trailers (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Trailer By ID",
+          "id": "get-trailer-by-id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/trailers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "trailer_id_here",
+                  "description": "Trailer ID"
+                }
+              ]
+            },
+            "description": "Get trailer details by ID (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Trailer",
+          "id": "create-trailer-id",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"licensePlate\": \"TRL-999\",\n    \"type\": \"box\",\n    \"capacityWeight\": 20000,\n    \"brand\": \"Schmitz\",\n    \"year\": 2023\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/trailers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers"
+              ]
+            },
+            "description": "Create a new trailer (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Trailer",
+          "id": "update-trailer-id",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"type\": \"refrigerated\",\n    \"status\": \"on_trip\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/trailers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "trailer_id_here",
+                  "description": "Trailer ID"
+                }
+              ]
+            },
+            "description": "Update trailer details (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Trailer",
+          "id": "delete-trailer-id",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/trailers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "trailer_id_here",
+                  "description": "Trailer ID"
+                }
+              ]
+            },
+            "description": "Delete a trailer (admin only)"
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
