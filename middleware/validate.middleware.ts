@@ -14,7 +14,7 @@ const validate =
             params: req.params,
           },
           { abortEarly: false },
-        ); // Validate everything so we can report all errors
+        );
         next();
       } catch (error) {
         if (error instanceof ValidationError) {

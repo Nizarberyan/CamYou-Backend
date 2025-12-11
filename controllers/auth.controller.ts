@@ -22,6 +22,19 @@ const authController = {
       res.status(500).json({ message: "Failed to login", error });
     }
   },
+
+  getMe: async (req: Request, res: Response) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({ message: "Authentication required" });
+        return;
+      }
+      const user = await AuthService.getMe(req.user.id);
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch user info", error });
+    }
+  },
 };
 
 export default authController;

@@ -1,4 +1,4 @@
-import Driver from "../models/Driver.model";
+import User from "../models/user.model";
 import type { InferType } from "yup";
 import { createDriverSchema } from "../validations/driver.validation";
 
@@ -6,23 +6,29 @@ type DriverInput = InferType<typeof createDriverSchema>["body"];
 
 const DriverService = {
   getDrivers: async () => {
-    return await Driver.find();
+    return await User.find({ role: "driver" });
   },
 
   getDriverById: async (id: string) => {
-    return await Driver.findById(id);
+    return await User.findOne({ _id: id, role: "driver" });
   },
 
   createDriver: async (driverData: DriverInput) => {
-    return await Driver.create(driverData);
+    return await User.create({ ...driverData, role: "driver" });
   },
 
   updateDriver: async (id: string, driverData: Partial<DriverInput>) => {
-    return await Driver.findByIdAndUpdate(id, driverData, { new: true });
+    return await User.findOneAndUpdate(
+      { _id: id, role: "driver" },
+      driverData,
+      {
+        new: true,
+      },
+    );
   },
 
   deleteDriver: async (id: string) => {
-    return await Driver.findByIdAndDelete(id);
+    return await User.findOneAndDelete({ _id: id, role: "driver" });
   },
 };
 

@@ -1,6 +1,6 @@
 import { test, expect, describe, mock } from "bun:test";
 import type { Request, Response, NextFunction } from "express";
-import authMiddleware from "../middleware/auth.middleware";
+import { authMiddleware } from "../middleware/auth.middleware";
 import jwt from "jsonwebtoken";
 
 describe("Auth Middleware", () => {

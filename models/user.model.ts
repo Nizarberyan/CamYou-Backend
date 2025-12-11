@@ -6,6 +6,9 @@ export interface IUser extends Document {
   email: string;
   password?: string;
   role: "user" | "admin" | "driver";
+  licenseNumber?: string;
+  licenseExpiry?: Date;
+  status?: "active" | "inactive" | "on_trip";
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -28,6 +31,17 @@ const userSchema = new Schema<IUser>(
       type: String,
       enum: ["user", "admin", "driver"],
       default: "user",
+    },
+    licenseNumber: {
+      type: String,
+    },
+    licenseExpiry: {
+      type: Date,
+    },
+    status: {
+      type: String,
+      enum: ["active", "inactive", "on_trip"],
+      default: "active",
     },
   },
   { timestamps: true },

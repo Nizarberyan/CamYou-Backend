@@ -1,12 +1,8 @@
 import { describe, it, expect, beforeAll, afterAll } from "bun:test";
 import mongoose from "mongoose";
-import User from "../models/User.model";
-import Driver from "../models/Driver.model";
-// Bun loads .env automatically
-
-// Use a separate test database or mock
+import User from "../models/user.model";
 const TEST_DB_URI =
-  process.env.MONGO_URL || "mongodb://localhost:27017/camyou_test";
+  process.env.MONGO_TEST_URL || "mongodb://localhost:27017/camyou_test";
 
 describe("Model Tests", () => {
   beforeAll(async () => {
@@ -49,11 +45,13 @@ describe("Model Tests", () => {
       name: "Test Driver",
       email: "driver@example.com",
       password: "securepass",
+      role: "driver",
       licenseNumber: "DL123456",
       licenseExpiry: new Date("2030-01-01"),
     };
-    const driver = await Driver.create(driverData);
+    const driver = await User.create(driverData);
     expect(driver.licenseNumber).toBe(driverData.licenseNumber);
     expect(driver.status).toBe("active");
+    expect(driver.role).toBe("driver");
   });
 });

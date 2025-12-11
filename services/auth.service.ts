@@ -1,4 +1,4 @@
-import User from "../models/User.model";
+import User from "../models/user.model";
 import jwt from "jsonwebtoken";
 
 const AuthService = {
@@ -8,7 +8,7 @@ const AuthService = {
     const user = await User.create({ name, email, password });
 
     const token = jwt.sign(
-      { id: user._id },
+      { id: user._id, role: user.role },
       process.env.JWT_SECRET || "secret",
       { expiresIn: "1h" },
     );
@@ -38,12 +38,20 @@ const AuthService = {
     }
 
     const token = jwt.sign(
-      { id: user._id },
+      { id: user._id, role: user.role },
       process.env.JWT_SECRET || "secret",
       { expiresIn: "1h" },
     );
 
     return { message: "Login successful", token };
+  },
+
+  getMe: async (userId: string) => {
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
   },
 };
 
