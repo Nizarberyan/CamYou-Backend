@@ -37,6 +37,20 @@ const authController = {
       res.status(500).json({ message: "Failed to fetch user info", error });
     }
   },
+
+  logout: async (req: Request, res: Response) => {
+    try {
+      const token = req.header("Authorization")?.replace("Bearer ", "");
+      if (!token) {
+        res.status(400).json({ message: "Token required for logout" });
+        return;
+      }
+      await AuthService.logout(token);
+      res.status(200).json({ message: "Logout successful" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to logout", error });
+    }
+  },
 };
 
 export default authController;

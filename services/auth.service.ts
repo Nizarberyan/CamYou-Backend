@@ -1,7 +1,12 @@
 import User from "../models/user.model";
 import jwt from "jsonwebtoken";
+import BlacklistedToken from "../models/blacklistedToken.model";
 
 const AuthService = {
+  logout: async (token: string) => {
+    await BlacklistedToken.create({ token });
+    return { message: "Logout successful" };
+  },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: async (userData: any) => {
     const { name, email, password, profileImage } = userData;
@@ -43,7 +48,14 @@ const AuthService = {
       { expiresIn: "1h" },
     );
 
-    return { message: "Login successful", token };
+    const userResponse = user.toObject();
+    delete userResponse.password;
+
+    return {
+      message: "Login successful",
+      token,
+      data: userResponse,
+    };
   },
 
   getMe: async (userId: string) => {
