@@ -9,8 +9,11 @@ import adminRoutes from "./routes/admin.route";
 import truckRoutes from "./routes/truck.route";
 import trailerRoutes from "./routes/trailer.route";
 import tireRoutes from "./routes/tire.route";
+import tripRoutes from "./routes/trip.route";
 import { requireAdmin } from "./middleware/admin.middleware";
 import { authMiddleware } from "./middleware/auth.middleware";
+import initCronJobs from "./jobs/cron";
+
 const app = express();
 
 app.use(express.json());
@@ -23,8 +26,11 @@ app.use("/api/admin", authMiddleware, requireAdmin, adminRoutes);
 app.use("/api/trucks", authMiddleware, truckRoutes);
 app.use("/api/trailers", authMiddleware, trailerRoutes);
 app.use("/api/tires", authMiddleware, tireRoutes);
+app.use("/api/trips", authMiddleware, tripRoutes);
+
 try {
   connectDB();
+  initCronJobs();
 } catch (error) {
   logger.error("MongoDB connection error:", error);
 }

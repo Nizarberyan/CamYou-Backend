@@ -4,8 +4,8 @@ import { authMiddleware } from "../middleware/auth.middleware";
 import { requireAdmin } from "../middleware/admin.middleware";
 import validate from "../middleware/validate.middleware";
 import {
-    createTrailerSchema,
-    updateTrailerSchema,
+  createTrailerSchema,
+  updateTrailerSchema,
 } from "../validations/trailer.validation";
 
 const router = express.Router();
@@ -14,18 +14,18 @@ router.use(authMiddleware);
 
 // Admin only routes for managing trailers
 router.post(
-    "/",
-    requireAdmin,
-    validate(createTrailerSchema),
-    trailerController.createTrailer,
+  "/",
+  requireAdmin,
+  validate(createTrailerSchema),
+  trailerController.createTrailer,
 );
 router.get("/", requireAdmin, trailerController.getTrailers);
 router.get("/:id", requireAdmin, trailerController.getTrailerById);
 router.put(
-    "/:id",
-    requireAdmin,
-    validate(updateTrailerSchema),
-    trailerController.updateTrailer,
+  "/:id",
+  requireAdmin,
+  validate(updateTrailerSchema),
+  trailerController.updateTrailer,
 );
 router.delete("/:id", requireAdmin, trailerController.deleteTrailer);
 

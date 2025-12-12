@@ -15,6 +15,7 @@ export interface ITruck extends Document {
   nextMaintenanceMileage?: number;
   insuranceExpiry?: Date;
   registrationExpiry?: Date;
+  maintenanceFlags?: string[];
 }
 
 const truckSchema = new Schema<ITruck>(
@@ -72,6 +73,10 @@ const truckSchema = new Schema<ITruck>(
     },
     registrationExpiry: {
       type: Date,
+    },
+    maintenanceFlags: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true },

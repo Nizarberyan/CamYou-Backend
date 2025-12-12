@@ -27,6 +27,11 @@ router.put(
   validate(updateTruckSchema),
   truckController.updateTruck,
 );
+router.post(
+  "/:id/maintenance",
+  requireAdmin,
+  truckController.performMaintenance,
+);
 router.delete("/:id", requireAdmin, truckController.deleteTruck);
 
 export default router;

@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import TruckService from "../services/truck.service";
+import MaintenanceService from "../services/maintenance.service";
 
 const truckController = {
   getTrucks: async (req: Request, res: Response) => {
@@ -82,6 +83,31 @@ const truckController = {
       res.status(200).json({ message: "Truck deleted successfully" });
     } catch (error) {
       res.status(500).json({ message: "Failed to delete truck", error });
+    }
+  },
+
+  performMaintenance: async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+      const { notes } = req.body;
+
+      if (!id) {
+        res.status(400).json({ message: "Truck ID is required" });
+        return;
+      }
+
+      const truck = await MaintenanceService.performMaintenance(id, notes);
+      if (!truck) {
+        res.status(404).json({ message: "Truck not found" });
+        return;
+      }
+      res.status(200).json(truck);
+    } catch (error) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const message = (error as any).message;
+      res
+        .status(500)
+        .json({ message: "Failed to perfom maintenance", error: message });
     }
   },
 };
