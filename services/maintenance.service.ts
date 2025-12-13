@@ -1,11 +1,9 @@
 import type { ITruck } from "../models/truck.model";
 import Truck from "../models/truck.model";
+import MaintenanceLog from "../models/maintenanceLog.model";
+import type { IMaintenanceLog } from "../models/maintenanceLog.model";
 
-const MAINTENANCE_RULES = {
-  OIL_CHANGE_INTERVAL_KM: 15000,
-  INSPECTION_INTERVAL_MONTHS: 12,
-  TIRE_ROTATION_Interval_KM: 20000,
-};
+import MaintenanceConfigService from "./maintenanceConfig.service";
 
 const MaintenanceService = {
   /**
@@ -29,10 +27,10 @@ const MaintenanceService = {
 
     // 2. Check Time for Inspection
     if (truck.lastMaintenanceDate) {
+      const config = await MaintenanceConfigService.getConfig();
       const nextInspectionDate = new Date(truck.lastMaintenanceDate);
       nextInspectionDate.setMonth(
-        nextInspectionDate.getMonth() +
-          MAINTENANCE_RULES.INSPECTION_INTERVAL_MONTHS,
+        nextInspectionDate.getMonth() + config.inspectionIntervalMonths,
       );
 
       if (new Date() >= nextInspectionDate) {
@@ -65,16 +63,70 @@ const MaintenanceService = {
     if (!truck) return null;
 
     const now = new Date();
+    const config = await MaintenanceConfigService.getConfig();
 
     truck.lastMaintenanceDate = now;
     truck.nextMaintenanceMileage =
-      truck.currentMileage + MAINTENANCE_RULES.OIL_CHANGE_INTERVAL_KM;
+      truck.currentMileage + config.oilChangeIntervalKm;
 
     // Clear flags and reset status
     truck.maintenanceFlags = [];
     truck.status = "available";
 
+    // Create Log Entry
+    await MaintenanceLog.create({
+      vehicle: truck._id,
+      vehicleModel: "Truck",
+      description: notes,
+      date: now,
+      type: "repair", // Defaulting to repair for ad-hoc maintenance
+      cost: 0, // Placeholder
+    });
+
     return await truck.save();
+  },
+
+  /**
+   * Logs a driver vehicle inspection (DVIR).
+   * Does NOT reset maintenance counters, but can flag issues.
+   */
+  logInspection: async (
+    vehicleId: string,
+    vehicleModel: "Truck" | "Trailer",
+    notes: string,
+    status: "good" | "issues_found"
+  ): Promise<IMaintenanceLog> => {
+
+    // If issues found, maybe flag the vehicle?
+    if (status === "issues_found") {
+      if (vehicleModel === "Truck") {
+        await Truck.findByIdAndUpdate(vehicleId, {
+          $addToSet: { maintenanceFlags: "Driver Reported Issue" }
+        });
+      }
+      // (Trailer update logic would go here if Trailer model had flags)
+    }
+
+    return await MaintenanceLog.create({
+      vehicle: vehicleId,
+      vehicleModel,
+      description: `Driver Inspection: ${notes}`,
+      date: new Date(),
+      type: "inspection",
+      cost: 0,
+    });
+  },
+
+  /**
+   * Retrieves maintenance history for a vehicle (or all if no ID provided)
+   */
+  getMaintenanceHistory: async (
+    vehicleId?: string,
+  ): Promise<IMaintenanceLog[]> => {
+    const filter = vehicleId ? { vehicle: vehicleId } : {};
+    return await MaintenanceLog.find(filter)
+      .sort({ date: -1 })
+      .populate("vehicle");
   },
 };
 

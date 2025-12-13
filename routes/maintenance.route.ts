@@ -6,9 +6,16 @@ import { requireAdmin } from "../middleware/admin.middleware";
 const router = express.Router();
 
 router.use(authMiddleware);
-router.use(requireAdmin); 
+// router.use(requireAdmin); // Removed blanket admin requirement
 
-router.post("/:truckId/perform", MaintenanceController.performMaintenance);
-router.get("/status", MaintenanceController.getMaintenanceStatus);
+// Admin Only Routes
+router.post("/:truckId/perform", requireAdmin, MaintenanceController.performMaintenance);
+router.get("/status", requireAdmin, MaintenanceController.getMaintenanceStatus);
+router.get("/config", requireAdmin, MaintenanceController.getConfig);
+router.put("/config", requireAdmin, MaintenanceController.updateConfig);
+
+// Authenticated Routes (Drivers + Admin)
+router.post("/:vehicleId/inspection", MaintenanceController.logInspection);
+router.get("/history", MaintenanceController.getMaintenanceHistory);
 
 export default router;
