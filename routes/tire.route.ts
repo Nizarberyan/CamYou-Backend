@@ -20,6 +20,8 @@ router.post(
 );
 router.get("/", requireAdmin, TireController.getAll);
 router.get("/:id", requireAdmin, TireController.getById);
+router.get("/:id/history", requireAdmin, TireController.getHistory);
+router.post("/:id/history", requireAdmin, TireController.addHistory);
 router.put(
   "/:id",
   requireAdmin,

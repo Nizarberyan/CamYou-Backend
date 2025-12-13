@@ -62,6 +62,27 @@ const TireController = {
       res.status(500).json({ message: error.message });
     }
   },
+
+  getHistory: async (req: Request, res: Response) => {
+    try {
+      const history = await TireService.getTireHistory(req.params.id as string);
+      res.status(200).json(history);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  },
+
+  addHistory: async (req: Request, res: Response) => {
+    try {
+      const historyEntry = await TireService.addHistoryEntry(
+        req.params.id as string,
+        req.body,
+      );
+      res.status(201).json(historyEntry);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  },
 };
 
 export default TireController;
