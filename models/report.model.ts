@@ -32,6 +32,10 @@ const reportSchema = new Schema<IReport>(
       type: Number,
       default: 0,
     },
+    totalExpenses: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true },
 );

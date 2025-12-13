@@ -20,7 +20,7 @@ router.post(
   validate(createTripSchema),
   TripController.create,
 );
-router.get("/", TripController.getAll); 
+router.get("/", TripController.getAll);
 router.get("/:id", TripController.getById);
 
 router.patch(
@@ -37,6 +37,9 @@ router.put(
   validate(updateTripSchema),
   TripController.update,
 );
+// Expenses
+router.post("/:id/expenses", TripController.addExpense);
+
 router.delete("/:id", requireAdmin, TripController.delete);
 
 export default router;

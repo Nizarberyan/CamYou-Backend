@@ -93,6 +93,31 @@ const TripController = {
       res.status(500).json({ message: error.message });
     }
   },
+
+  addExpense: async (req: Request, res: Response) => {
+    try {
+      const { type, amount, description, date } = req.body;
+      if (!type || !amount) {
+        res.status(400).json({ message: "Type and amount are required" });
+        return;
+      }
+
+      const trip = await TripService.addExpense(req.params.id as string, {
+        type,
+        amount,
+        description,
+        date,
+      });
+
+      if (!trip) {
+        res.status(404).json({ message: "Trip not found" });
+        return;
+      }
+      res.status(200).json(trip);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  },
 };
 
 export default TripController;

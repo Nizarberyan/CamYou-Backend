@@ -17,6 +17,13 @@ export interface ITrip extends Document {
   estimatedDistance?: number; // in km
   actualDistance?: number;
   notes?: string;
+  expenses?: {
+    type: string;
+    amount: number;
+    description: string;
+    date: Date;
+    receiptUrl?: string; // Optional for now
+  }[];
 }
 
 const tripSchema = new Schema<ITrip>(
@@ -41,6 +48,15 @@ const tripSchema = new Schema<ITrip>(
     estimatedDistance: { type: Number },
     actualDistance: { type: Number },
     notes: { type: String },
+    expenses: [
+      {
+        type: { type: String, required: true },
+        amount: { type: Number, required: true },
+        description: { type: String },
+        date: { type: Date, default: Date.now },
+        receiptUrl: { type: String },
+      },
+    ],
   },
   { timestamps: true },
 );

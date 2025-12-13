@@ -7,7 +7,7 @@ import Truck from "../models/truck.model";
 import ReportService from "../services/report.service";
 
 describe("Report Service Tests", () => {
-  let tripIds: string[] = [];
+  const tripIds: string[] = [];
   const TEST_DATE = new Date("2023-11-01");
 
   beforeAll(async () => {
