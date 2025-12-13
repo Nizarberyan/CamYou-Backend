@@ -59,6 +59,10 @@ const ReportService = {
   getReports: async (limit: number = 30): Promise<IReport[]> => {
     return await Report.find().sort({ date: -1 }).limit(limit);
   },
+
+  getReportById: async (id: string): Promise<IReport | null> => {
+    return await Report.findById(id);
+  },
 };
 
 export default ReportService;

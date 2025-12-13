@@ -10,7 +10,24 @@ const AuthService = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: async (userData: any) => {
     const { name, email, password, profileImage } = userData;
-    const user = await User.create({ name, email, password, profileImage });
+
+    const userCount = await User.countDocuments();
+    let role = "driver";
+    let status = "inactive";
+
+    if (userCount === 0) {
+      role = "admin";
+      status = "active";
+    }
+
+    const user = await User.create({
+      name,
+      email,
+      password,
+      profileImage,
+      role,
+      status,
+    });
 
     const token = jwt.sign(
       { id: user._id, role: user.role },
@@ -24,7 +41,7 @@ const AuthService = {
     return {
       message: "User registered successfully",
       token,
-      data: userResponse,
+      user: userResponse,
     };
   },
 
@@ -54,7 +71,7 @@ const AuthService = {
     return {
       message: "Login successful",
       token,
-      data: userResponse,
+      user: userResponse,
     };
   },
 

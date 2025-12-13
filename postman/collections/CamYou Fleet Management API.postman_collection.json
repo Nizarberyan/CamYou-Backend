@@ -51,8 +51,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/auth/register",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "auth", "register"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
             },
             "description": "Register a new user"
           },
@@ -80,8 +86,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/auth/login",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "auth", "login"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
             },
             "description": "Login a user and get authentication token"
           },
@@ -103,8 +115,14 @@
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/auth/login",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "auth", "login"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ]
                 }
               },
               "status": "OK",
@@ -135,8 +153,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/auth/me",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "auth", "me"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
             },
             "description": "Get current logged-in user info"
           },
@@ -156,8 +180,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/drivers",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "drivers"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
             },
             "description": "Get a list of all drivers"
           },
@@ -170,8 +199,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{baseUrl}}/api/drivers",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "drivers"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "drivers"
+                  ]
                 }
               },
               "status": "OK",
@@ -205,8 +239,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/drivers",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "drivers"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
             },
             "description": "Create a new driver"
           },
@@ -228,8 +267,13 @@
                 },
                 "url": {
                   "raw": "{{baseUrl}}/api/drivers",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "drivers"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "drivers"
+                  ]
                 }
               },
               "status": "Created",
@@ -279,8 +323,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/admin/drivers",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "admin", "drivers"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "drivers"
+              ]
             },
             "description": "Create a new driver (admin only)"
           },
@@ -304,8 +354,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/admin/drivers",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "admin", "drivers"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "drivers"
+              ]
             },
             "description": "Get a list of all drivers (admin only)"
           },
@@ -329,8 +385,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/admin/drivers/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "admin", "drivers", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "drivers",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -370,8 +433,15 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/admin/drivers/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "admin", "drivers", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "drivers",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -402,8 +472,15 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/admin/drivers/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "admin", "drivers", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "drivers",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -449,8 +526,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/trucks",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trucks"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trucks"
+              ]
             },
             "description": "Create a new truck (admin only)"
           },
@@ -474,8 +556,13 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/trucks",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trucks"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trucks"
+              ]
             },
             "description": "Get a list of all trucks (admin only)"
           },
@@ -488,8 +575,13 @@
                 "header": [],
                 "url": {
                   "raw": "{{baseUrl}}/api/trucks",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "trucks"]
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trucks"
+                  ]
                 }
               },
               "status": "OK",
@@ -524,8 +616,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/trucks/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trucks", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trucks",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -545,8 +643,14 @@
                 "header": [],
                 "url": {
                   "raw": "{{baseUrl}}/api/trucks/:id",
-                  "host": ["{{baseUrl}}"],
-                  "path": ["api", "trucks", ":id"],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "trucks",
+                    ":id"
+                  ],
                   "variable": [
                     {
                       "key": "id",
@@ -596,8 +700,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/trucks/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trucks", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trucks",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -628,8 +738,14 @@
             "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/trucks/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trucks", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trucks",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -662,8 +778,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/trailers",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trailers"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers"
+              ]
             },
             "description": "Get a list of all trailers (admin only)"
           },
@@ -683,8 +804,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/trailers/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trailers", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -725,8 +852,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/trailers",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trailers"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers"
+              ]
             },
             "description": "Create a new trailer (admin only)"
           },
@@ -760,8 +892,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/trailers/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trailers", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -788,8 +926,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/trailers/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trailers", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trailers",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -829,8 +973,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/tires",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tires"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tires"
+              ]
             }
           }
         },
@@ -847,8 +996,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tires",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tires"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tires"
+              ]
             }
           }
         },
@@ -865,8 +1019,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tires/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tires", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tires",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -898,8 +1058,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/tires/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tires", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tires",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -922,8 +1088,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/tires/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "tires", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tires",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -960,8 +1132,13 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/trips",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trips"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trips"
+              ]
             }
           }
         },
@@ -978,8 +1155,13 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/trips",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trips"]
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trips"
+              ]
             }
           }
         },
@@ -996,8 +1178,14 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/trips/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trips", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trips",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -1029,8 +1217,15 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/trips/:id/status",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trips", ":id", "status"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trips",
+                ":id",
+                "status"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -1053,8 +1248,15 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/trips/:id/work-order",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trips", ":id", "work-order"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trips",
+                ":id",
+                "work-order"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -1086,8 +1288,14 @@
             },
             "url": {
               "raw": "{{baseUrl}}/api/trips/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trips", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trips",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
@@ -1110,13 +1318,141 @@
             ],
             "url": {
               "raw": "{{baseUrl}}/api/trips/:id",
-              "host": ["{{baseUrl}}"],
-              "path": ["api", "trips", ":id"],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "trips",
+                ":id"
+              ],
               "variable": [
                 {
                   "key": "id",
                   "value": "trip_id"
                 }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Maintenance",
+      "item": [
+        {
+          "name": "Perform Maintenance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"notes\": \"Oil change performed\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/maintenance/:truckId/perform",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "maintenance",
+                ":truckId",
+                "perform"
+              ],
+              "variable": [
+                {
+                  "key": "truckId",
+                  "value": "truck_id"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Maintenance Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/maintenance/status",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "maintenance",
+                "status"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reports",
+      "item": [
+        {
+          "name": "Get Daily Reports",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/daily",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "daily"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Generate Daily Report",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/reports/generate",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "generate"
               ]
             }
           }

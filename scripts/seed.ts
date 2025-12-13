@@ -4,6 +4,7 @@ import Truck from "../models/truck.model";
 import Trailer from "../models/trailer.model";
 import Trip from "../models/trip.model";
 import Tire from "../models/tire.model";
+import Report from "../models/report.model";
 import connectDB from "../config/db";
 import logger from "../config/logger";
 
@@ -18,18 +19,19 @@ const seedData = async () => {
         await Trailer.deleteMany({});
         await Trip.deleteMany({});
         await Tire.deleteMany({});
+        await Report.deleteMany({}); // Clear reports
         logger.info("Cleared existing data.");
 
-        // Create Admin
+        // ... Create Admin, Users ... (Keep same)
         const admin = await User.create({
             name: "Admin User",
             email: "admin@camyou.com",
             password: "password123",
             role: "admin",
+            status: "active",
         });
         logger.info("Created Admin user.");
 
-        // Create Drivers
         const driver1 = await User.create({
             name: "John Driver",
             email: "john@camyou.com",
@@ -37,6 +39,7 @@ const seedData = async () => {
             role: "driver",
             licenseNumber: "DL-12345",
             licenseExpiry: new Date("2025-12-31"),
+            status: "active",
         });
 
         const driver2 = await User.create({
@@ -46,10 +49,11 @@ const seedData = async () => {
             role: "driver",
             licenseNumber: "DL-67890",
             licenseExpiry: new Date("2026-06-30"),
+            status: "active",
         });
         logger.info("Created Drivers.");
 
-        // Create Trucks
+        // Create Trucks with varying states
         const truck1 = await Truck.create({
             licensePlate: "TRUCK-001",
             brand: "Volvo",
@@ -60,20 +64,43 @@ const seedData = async () => {
             fuelCapacity: 600,
             status: "available",
             assignedDriver: driver1._id,
+            nextMaintenanceMileage: 30000,
+            lastMaintenanceDate: new Date("2024-01-01"),
         });
 
+        // Truck needing maintenance due to mileage
         const truck2 = await Truck.create({
             licensePlate: "TRUCK-002",
             brand: "Mercedes",
             vehicleModel: "Actros",
             year: 2022,
-            currentMileage: 45000,
+            currentMileage: 46000,
             fuelType: "diesel",
             fuelCapacity: 550,
             status: "maintenance",
+            nextMaintenanceMileage: 45000, // Exceeded
+            lastMaintenanceDate: new Date("2024-05-15"),
+            maintenanceFlags: ["Mileage limit exceeded"],
         });
+
+        // Truck needing maintenance due to time
+        const truck3 = await Truck.create({
+            licensePlate: "TRUCK-003",
+            brand: "Scania",
+            vehicleModel: "R500",
+            year: 2021,
+            currentMileage: 85000,
+            fuelType: "diesel",
+            fuelCapacity: 700,
+            status: "available", // Not yet flagged as 'maintenance' status but physically overdue
+            nextMaintenanceMileage: 100000,
+            lastMaintenanceDate: new Date("2023-01-01"), // > 1 year
+            maintenanceFlags: ["Annual Inspection Due"],
+        });
+
         logger.info("Created Trucks.");
 
+        // ... Create Tires and Trailers ... (Simplified or Keep same)
         // Create Tires
         await Tire.create({
             serialNumber: "TIRE-001",
@@ -139,6 +166,29 @@ const seedData = async () => {
             assignedTruck: truck2._id,
         });
         logger.info("Created Trailers.");
+
+        // Create Historical Reports (Last 30 days)
+        const today = new Date();
+        for (let i = 0; i < 30; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() - i);
+            date.setHours(0, 0, 0, 0);
+
+            // Generate some random stats
+            const completedTrips = Math.floor(Math.random() * 5) + 1;
+            const activeTrips = Math.floor(Math.random() * 3);
+            const totalMiles = completedTrips * (Math.floor(Math.random() * 300) + 100);
+            const totalFuel = Math.floor(totalMiles / 3.5); // approx mpg
+
+            await Report.create({
+                date,
+                totalMiles,
+                totalFuel,
+                activeTrips,
+                completedTrips,
+            });
+        }
+        logger.info("Created Historical Reports.");
 
         // Create Trips
         await Trip.create({

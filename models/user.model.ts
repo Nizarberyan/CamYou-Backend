@@ -46,7 +46,7 @@ const userSchema = new Schema<IUser>(
     },
     profileImage: {
       type: String,
-      default: "", // Or provide a default placeholder URL if preferred
+      default: "",
     },
   },
   { timestamps: true },

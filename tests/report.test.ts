@@ -81,7 +81,7 @@ describe("Report Service Tests", () => {
     await Trip.create({
       tripNumber: "REP-004",
       status: "in_progress",
-      startedDate: new Date("2023-11-01T08:00:00Z"),
+      startDate: new Date("2023-11-01T08:00:00Z"),
       scheduledDate: TEST_DATE,
       startLocation: "A",
       endLocation: "B",
@@ -89,7 +89,7 @@ describe("Report Service Tests", () => {
       truck: truck._id,
     });
 
-    tripIds.push(trip1.id, trip2.id);
+    tripIds.push(trip1._id.toString(), trip2._id.toString());
   });
 
   afterAll(async () => {
