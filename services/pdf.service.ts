@@ -45,11 +45,11 @@ const PDFService = {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const driverEmail = (trip.driver as any).email || "";
 
-     
+
     const truckParams = trip.truck
       ? `${(trip.truck as any).licensePlate} (${(trip.truck as any).brand})`
       : "None";
-     
+
     const trailerParams = trip.trailer
       ? `${(trip.trailer as any).licensePlate} (${(trip.trailer as any).type})`
       : "None";
@@ -173,6 +173,15 @@ const PDFService = {
     doc
       .font("Helvetica-Bold")
       .text(`${report.activeTrips}`, col2X + 120, startY + 25);
+
+    doc.font("Helvetica").text(`Total Expenses:`, col1X, startY + 50);
+    doc
+      .font("Helvetica-Bold")
+      .text(
+        `$${(report.totalExpenses || 0).toLocaleString()}`,
+        col1X + 120,
+        startY + 50,
+      );
 
     doc.moveDown(5);
 

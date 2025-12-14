@@ -247,11 +247,13 @@ const seedData = async () => {
       const totalMiles =
         completedTrips * (Math.floor(Math.random() * 300) + 100);
       const totalFuel = Math.floor(totalMiles / 3.5); // approx mpg
+      const totalExpenses = Math.floor(Math.random() * 200);
 
       await Report.create({
         date,
         totalMiles,
         totalFuel,
+        totalExpenses,
         activeTrips,
         completedTrips,
       });
@@ -298,6 +300,20 @@ const seedData = async () => {
       actualDistance: 250,
       status: "completed",
       fuelAdded: 60,
+      expenses: [
+        {
+          type: "tolls",
+          amount: 45.5,
+          description: "Peage A62",
+          date: new Date(new Date().setDate(new Date().getDate() - 5)),
+        },
+        {
+          type: "food",
+          amount: 15.0,
+          description: "Lunch stop",
+          date: new Date(new Date().setDate(new Date().getDate() - 5)),
+        },
+      ],
     });
     logger.info("Created Trips.");
 

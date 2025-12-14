@@ -7,6 +7,7 @@ export interface IReport extends Document {
   activeTrips: number;
   completedTrips: number;
   createdAt: Date;
+  totalExpenses: number;
 }
 
 const reportSchema = new Schema<IReport>(

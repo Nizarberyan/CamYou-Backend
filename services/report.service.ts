@@ -31,10 +31,18 @@ const ReportService = {
       0,
     );
 
+    const totalExpenses = completedTrips.reduce((sum, trip) => {
+      const tripExpenses =
+        trip.expenses?.reduce((expSum, exp) => expSum + (exp.amount || 0), 0) ||
+        0;
+      return sum + tripExpenses;
+    }, 0);
+
     const reportData = {
       date: startOfDay,
       totalMiles,
       totalFuel,
+      totalExpenses,
       activeTrips: activeTripsCount,
       completedTrips: completedTrips.length,
     };
