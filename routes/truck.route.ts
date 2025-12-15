@@ -12,6 +12,10 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+// Public routes for authenticated users (Drivers + Admin)
+router.get("/", truckController.getTrucks);
+router.get("/:id", truckController.getTruckById);
+
 // Admin only routes for managing trucks
 router.post(
   "/",
@@ -19,8 +23,6 @@ router.post(
   validate(createTruckSchema),
   truckController.createTruck,
 );
-router.get("/", requireAdmin, truckController.getTrucks);
-router.get("/:id", requireAdmin, truckController.getTruckById);
 router.put(
   "/:id",
   requireAdmin,

@@ -33,7 +33,7 @@ app.use("/api/trucks", authMiddleware, truckRoutes);
 app.use("/api/trailers", authMiddleware, trailerRoutes);
 app.use("/api/tires", authMiddleware, tireRoutes);
 app.use("/api/trips", authMiddleware, tripRoutes);
-app.use("/api/maintenance", authMiddleware, requireAdmin, maintenanceRoutes);
+app.use("/api/maintenance", authMiddleware, maintenanceRoutes);
 app.use("/api/reports", authMiddleware, requireAdmin, reportRoutes);
 
 try {

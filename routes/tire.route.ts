@@ -12,16 +12,19 @@ const router = express.Router();
 
 router.use(authMiddleware);
 
+// Public routes for authenticated users ( Drivers + Admin )
+router.get("/", TireController.getAll);
+router.get("/:id", TireController.getById);
+router.get("/:id/history", TireController.getHistory);
+router.post("/:id/history", TireController.addHistory);
+
 router.post(
   "/",
   requireAdmin,
   validate(createTireSchema),
   TireController.create,
 );
-router.get("/", requireAdmin, TireController.getAll);
-router.get("/:id", requireAdmin, TireController.getById);
-router.get("/:id/history", requireAdmin, TireController.getHistory);
-router.post("/:id/history", requireAdmin, TireController.addHistory);
+
 router.put(
   "/:id",
   requireAdmin,

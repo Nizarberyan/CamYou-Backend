@@ -13,6 +13,7 @@ export interface ITruck extends Document {
   status: "available" | "on_trip" | "maintenance" | "inactive";
   lastMaintenanceDate?: Date;
   nextMaintenanceMileage?: number;
+  nextTireRotationMileage?: number; // New field for tire rotation tracking
   insuranceExpiry?: Date;
   registrationExpiry?: Date;
   maintenanceFlags?: string[];
@@ -66,6 +67,9 @@ const truckSchema = new Schema<ITruck>(
       type: Date,
     },
     nextMaintenanceMileage: {
+      type: Number,
+    },
+    nextTireRotationMileage: {
       type: Number,
     },
     insuranceExpiry: {

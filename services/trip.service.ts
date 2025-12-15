@@ -6,7 +6,7 @@ const TripService = {
   getAllTrips: async (filter: any = {}): Promise<ITrip[]> => {
     return await Trip.find(filter)
       .populate("driver", "name email")
-      .populate("truck", "licensePlate brand")
+      .populate("truck", "licensePlate brand vehicleModel")
       .populate("trailer", "licensePlate type");
   },
 
@@ -62,9 +62,9 @@ const TripService = {
 
   getTripById: async (id: string): Promise<ITrip | null> => {
     return await Trip.findById(id)
-      .populate("driver", "name email")
-      .populate("truck", "licensePlate brand")
-      .populate("trailer", "licensePlate type");
+      .populate("driver", "name email licenseNumber")
+      .populate("truck")
+      .populate("trailer");
   },
 
   updateTrip: async (
@@ -72,9 +72,9 @@ const TripService = {
     updateData: Partial<ITrip>,
   ): Promise<ITrip | null> => {
     return await Trip.findByIdAndUpdate(id, updateData, { new: true })
-      .populate("driver", "name email")
-      .populate("truck", "licensePlate brand")
-      .populate("trailer", "licensePlate type");
+      .populate("driver", "name email licenseNumber")
+      .populate("truck")
+      .populate("trailer");
   },
 
   deleteTrip: async (id: string): Promise<ITrip | null> => {

@@ -17,6 +17,7 @@ export interface ITrailer extends Document {
   assignedTruck?: mongoose.Types.ObjectId;
   lastMaintenanceDate?: Date;
   nextMaintenanceDate?: Date;
+  maintenanceFlags: string[];
 }
 
 const trailerSchema = new Schema<ITrailer>(
@@ -46,6 +47,7 @@ const trailerSchema = new Schema<ITrailer>(
     assignedTruck: { type: Schema.Types.ObjectId, ref: "Truck" },
     lastMaintenanceDate: { type: Date },
     nextMaintenanceDate: { type: Date },
+    maintenanceFlags: { type: [String], default: [] },
   },
   { timestamps: true },
 );

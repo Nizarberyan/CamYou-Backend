@@ -9,7 +9,7 @@ router.use(authMiddleware);
 // router.use(requireAdmin); // Removed blanket admin requirement
 
 // Admin Only Routes
-router.post("/:truckId/perform", requireAdmin, MaintenanceController.performMaintenance);
+router.post("/:vehicleId/perform", requireAdmin, MaintenanceController.performMaintenance);
 router.get("/status", requireAdmin, MaintenanceController.getMaintenanceStatus);
 router.get("/config", requireAdmin, MaintenanceController.getConfig);
 router.put("/config", requireAdmin, MaintenanceController.updateConfig);

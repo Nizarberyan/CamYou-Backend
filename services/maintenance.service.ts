@@ -1,5 +1,6 @@
 import type { ITruck } from "../models/truck.model";
 import Truck from "../models/truck.model";
+import Trailer from "../models/trailer.model";
 import MaintenanceLog from "../models/maintenanceLog.model";
 import type { IMaintenanceLog } from "../models/maintenanceLog.model";
 
@@ -22,6 +23,15 @@ const MaintenanceService = {
       truck.currentMileage >= truck.nextMaintenanceMileage
     ) {
       flags.push("Oil Change Required");
+      needsMaintenance = true;
+    }
+
+    // 1b. Check Mileage for Tire Rotation
+    if (
+      truck.nextTireRotationMileage &&
+      truck.currentMileage >= truck.nextTireRotationMileage
+    ) {
+      flags.push("Tire Rotation Required");
       needsMaintenance = true;
     }
 
@@ -56,34 +66,49 @@ const MaintenanceService = {
    * Resets maintenance counters after service is performed.
    */
   performMaintenance: async (
-    truckId: string,
+    vehicleId: string,
     notes: string,
-  ): Promise<ITruck | null> => {
-    const truck = await Truck.findById(truckId);
-    if (!truck) return null;
+  ): Promise<ITruck | any | null> => {
+    let vehicle: any = await Truck.findById(vehicleId);
+    let vehicleModel = "Truck";
+
+    if (!vehicle) {
+      vehicle = await Trailer.findById(vehicleId);
+      vehicleModel = "Trailer";
+    }
+
+    if (!vehicle) return null;
 
     const now = new Date();
     const config = await MaintenanceConfigService.getConfig();
 
-    truck.lastMaintenanceDate = now;
-    truck.nextMaintenanceMileage =
-      truck.currentMileage + config.oilChangeIntervalKm;
+    vehicle.lastMaintenanceDate = now;
+
+    // Only update mileage logic for Trucks
+    if (vehicleModel === "Truck" && vehicle.currentMileage !== undefined) {
+      vehicle.nextMaintenanceMileage =
+        vehicle.currentMileage + config.oilChangeIntervalKm;
+
+      // Also reset tire rotation if it was flagged or generally on maintenance
+      vehicle.nextTireRotationMileage =
+        vehicle.currentMileage + config.tireRotationIntervalKm;
+    }
 
     // Clear flags and reset status
-    truck.maintenanceFlags = [];
-    truck.status = "available";
+    vehicle.maintenanceFlags = [];
+    vehicle.status = "available";
 
     // Create Log Entry
     await MaintenanceLog.create({
-      vehicle: truck._id,
-      vehicleModel: "Truck",
+      vehicle: vehicle._id,
+      vehicleModel: vehicleModel,
       description: notes,
       date: now,
-      type: "repair", // Defaulting to repair for ad-hoc maintenance
-      cost: 0, // Placeholder
+      type: "repair",
+      cost: 0,
     });
 
-    return await truck.save();
+    return await vehicle.save();
   },
 
   /**
@@ -101,10 +126,20 @@ const MaintenanceService = {
     if (status === "issues_found") {
       if (vehicleModel === "Truck") {
         await Truck.findByIdAndUpdate(vehicleId, {
-          $addToSet: { maintenanceFlags: "Driver Reported Issue" }
+          $pull: { maintenanceFlags: "Driver Reported Issue" },
+        });
+        await Truck.findByIdAndUpdate(vehicleId, {
+          $push: { maintenanceFlags: `Driver Reported Issue: ${notes}` },
+        });
+      } else if (vehicleModel === "Trailer") {
+        await Trailer.findByIdAndUpdate(vehicleId, {
+          $pull: { maintenanceFlags: "Driver Reported Issue" },
+        });
+        await Trailer.findByIdAndUpdate(vehicleId, {
+          $push: { maintenanceFlags: `Driver Reported Issue: ${notes}` },
         });
       }
-      // (Trailer update logic would go here if Trailer model had flags)
+
     }
 
     return await MaintenanceLog.create({
