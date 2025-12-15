@@ -4,6 +4,7 @@ import {
   type createTruckSchema,
   type updateTruckSchema,
 } from "../validations/truck.validation";
+import MaintenanceConfigService from "./maintenanceConfig.service";
 
 type CreateTruckInput = InferType<typeof createTruckSchema>["body"];
 type UpdateTruckInput = InferType<typeof updateTruckSchema>["body"];
@@ -18,7 +19,18 @@ const TruckService = {
   },
 
   createTruck: async (truckData: CreateTruckInput) => {
-    const truck = await Truck.create(truckData);
+    const config = await MaintenanceConfigService.getConfig();
+
+    // Initialize next maintenance milestones based on current mileage (or 0)
+    const currentMileage = truckData.currentMileage || 0;
+
+    const truckDetails = {
+      ...truckData,
+      nextMaintenanceMileage: currentMileage + config.oilChangeIntervalKm,
+      nextTireRotationMileage: currentMileage + config.tireRotationIntervalKm,
+    };
+
+    const truck = await Truck.create(truckDetails);
     return truck;
   },
 

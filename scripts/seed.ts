@@ -78,7 +78,8 @@ const seedData = async () => {
       fuelCapacity: 600,
       status: "available",
       assignedDriver: driver1._id,
-      nextMaintenanceMileage: 30000,
+      nextMaintenanceMileage: 15000 + 15000,
+      nextTireRotationMileage: 15000 + 20000,
       lastMaintenanceDate: new Date("2024-01-01"),
     });
 
@@ -93,6 +94,7 @@ const seedData = async () => {
       fuelCapacity: 550,
       status: "maintenance",
       nextMaintenanceMileage: 45000, // Exceeded
+      nextTireRotationMileage: 46000 + 20000,
       lastMaintenanceDate: new Date("2024-05-15"),
       maintenanceFlags: ["Mileage limit exceeded"],
     });
@@ -108,6 +110,7 @@ const seedData = async () => {
       fuelCapacity: 700,
       status: "available",
       nextMaintenanceMileage: 100000,
+      nextTireRotationMileage: 85000 + 20000,
       lastMaintenanceDate: new Date("2023-01-01"),
       maintenanceFlags: ["Annual Inspection Due"],
     });
